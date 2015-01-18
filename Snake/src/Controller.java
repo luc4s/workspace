@@ -56,23 +56,14 @@ public class Controller extends KeyAdapter implements KeyListener {
 	}
 	
 	private double computeAngle(double target){
-		
 		double delta = target - snake.getHeadOrientation();
-		System.out.println(Math.abs(invert(delta)));
-		if(Math.abs(delta) > Math.abs(invert(delta))){
+		if(Math.abs(delta) > Math.abs(invert(delta)))
 			delta = invert(delta);
-		}
 
 		if(Math.abs(delta) <= THETA) 
 			return 0;
 		
-		double signum = Math.signum(delta);
-//		if(delta > ){
-//			signum = Math.signum(2*Math.PI - delta);
-//		}
-//			
-		return signum * ANGLE_INC;
-//		return (target - snake.getHeadOrientation()) * 1/10d;
+		return Math.signum(delta) * ANGLE_INC;
 	}
 	
 	private double invert(double angle){

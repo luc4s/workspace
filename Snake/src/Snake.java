@@ -38,11 +38,31 @@ public class Snake implements Iterable<SnakePart>{
 	public void move(){
 		SnakePart n = body.getFirst();
 		n.setPosition(n.x() + (START_SPEED * (Math.cos(n.getOrientation()))), n.y() + START_SPEED * Math.sin(n.getOrientation()));
+		/*
 		for(SnakePart s : body.subList(1, body.size())){
 			s.setPosition(s.x() + (START_SPEED * (Math.cos(s.getOrientation()))), s.y() + START_SPEED * Math.sin(s.getOrientation()));
 			s.setOrientation(Math.atan2((n.y() - s.y()), (n.x() - s.x())));
 			n = s;
 		}
+		//*/
+		//*
+		for(SnakePart s : body.subList(1, body.size())){
+			double  x = START_SPEED * Math.cos(s.getOrientation()),
+					y = START_SPEED * Math.sin(s.getOrientation()),
+					dx = n.x() - s.x(),
+					dy = n.x() - s.y(),
+					k = Math.sqrt(Math.pow(PART_LENGTH, 2)/(dx*dx + dy*dy));
+					x *= k;
+					y *= k;
+					
+			if(Math.sqrt(x*x + y*y) - PART_LENGTH < 2.0)
+				System.out.println(Math.sqrt(x*x + y*y));
+			
+			s.setPosition(s.x() + x, s.y() + y);
+			s.setOrientation(Math.atan2((n.y() - s.y()), (n.x() - s.x())));
+			n = s;
+		}
+		//*/
 		
 	}
 	
